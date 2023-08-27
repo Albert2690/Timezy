@@ -1,0 +1,124 @@
+<%- include('../partials/header')%>
+
+<div class="dashboard-wrapper user-dashboard">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Date & Time</th>
+                    <th>Items</th>
+                    <th>Total Price</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <!-- ... Your previous code ... -->
+
+<tbody>
+    <% usercart.reverse().forEach((order) => { %>
+        <tr>
+            <td><%= order._id %></td>
+            <td><%= order.createdAt.toLocaleString() %></td>
+            <td><%= order.items.length %></td>
+            <td>INR:<%= order.total %>.00</td>
+            <td>
+                <% if (order.status === 'placed') { %>
+                    <span class="label label-primary rounded-pill" style="background-color: rgb(22, 139, 255);">Placed</span>
+                    
+                <%}else if (order.status === 'pending') { %>
+                    <span class="label label-primary rounded-pill" style="background-color: rgb(178, 134, 14);">Pending</span>
+                <% } else if (order.status === 'delivered') { %>
+                    <span class="label label-primary rounded-pill" style="background-color: rgb(0, 150, 5);">Delivered</span>
+                <% } else if (order.status === 'cancel requested') { %>
+                    <span class="label label-primary rounded-pill" style="background-color: orange;">Cancel Requested</span>
+                <% } else if (order.status === 'cancelled') { %>
+                    <span class="label label-primary rounded-pill" style="background-color: red;">Order Cancelled</span>
+                <% } else if (order.status === 'shipped') { %>
+                    <span class="label label-primary rounded-pill" style="background-color: purple;">Dispatched</span>
+                <% } else if (order.status === 'return requested') { %>
+                    <span class="label label-primary rounded-pill" style="background-color: yellow;">Return Requested</span>
+                <% } else if (order.status === 'return accepted') { %>
+                    <span class="label label-primary rounded-pill" style="background-color: rgb(10, 173, 173);">Return Accepted</span>
+                <% } else if (order.status === 'cancel accepted') { %>
+                    <span class="label label-primary rounded-pill" style="background-color: rgb(2, 247, 255);">Cancel Accepted</span>
+                <% } else if (order.status === 'direct cancel') { %>
+                    <span class="label label-primary rounded-pill" style="background-color: rgb(255, 8, 0);">Order Cancelled</span>
+                <% } else if (order.status === "cancel declined") { %>
+                    <span class="label label-primary rounded-pill" style="background-color: rgb(220, 201, 200);">Cancel Declined</span>
+                <% } else if (order.status === 'return declined') { %>
+                    <span class="label label-primary rounded-pill" style="background-color: rgb(85, 10, 8);">Return Declined</span>
+                
+                <% } else if (order.status === 'refunded') { %>
+                    <span class="label label-primary rounded-pill" style="background-color: rgb(86, 246, 182);color: aliceblue;">Refunded</span>
+                <% } %>
+            </td>
+            <td><a href="/orderdetials/<%= order._id %>" class="btn btn-default">View</a></td>
+            <% if (order.status === 'placed') { %>
+                <td><a href="#" onclick="cancelOrder('<%= order._id %>', 'cancel requested'); return false;"><i class="fas fa-times"></i> Cancel</a></td>
+            <% } else if (order.status === 'delivered') { %>
+                <td><a href="#" onclick="cancelOrder('<%= order._id %>', 'return requested'); return false;"><i class="fas fa-reply"></i> Return</a></td>
+            <% } else { %>
+                <td>....</td>
+            <% } %>
+        </tr>
+    <% }) %>
+</tbody>
+
+<!-- ... Your remaining code ... -->
+
+        </table>
+    </div>
+
+
+
+
+    <script>
+    //    function cancelOrder(orderid, status){
+    //     console.log(orderid)
+    //     $.ajax({
+    //         url:"/cancelorder",
+    //         method:"put",
+    //         data:{orderid:orderid,status:status},
+    //         success:(response)=>{
+    //      if(response){
+    //         const rowIndex = $(`tbody tr`).index($(`tbody tr[data-orderid="${orderid}"]`));
+    //                 const statusCell = $(`tbody tr:nth-child(${rowIndex + 1}) td:nth-child(4)`);
+    //                 statusCell.html(`<span class="label label-primary rounded-pill">${status}</span>`);
+
+
+    //      }  
+    //      location.reload()
+    //     }
+    //     })
+       
+    //    }
+
+    function cancelOrder(orderid, status) {
+  console.log(orderid);
+  console.log(status);
+  $.ajax({
+    url: "/admin/cancelorder",
+    method: "put",
+    data: { orderid: orderid, status: status },
+    success: (response) => {
+      if (response) {
+        const rowIndex = $(`tbody tr`).index($(`tbody tr[data-orderid="${orderid}"]`));
+        const statusCell = $(`tbody tr:nth-child(${rowIndex + 1}) td:nth-child(4)`);
+        statusCell.html(`<span class="label label-primary rounded-pill">${status}</span>`);
+      }
+      location.reload();
+    }
+  });
+}
+    </script>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+<%- include('../partials/footer')%>

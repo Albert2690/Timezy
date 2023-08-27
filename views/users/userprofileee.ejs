@@ -1,0 +1,156 @@
+<%- include('../layouts/header') %>
+<section style="background-color: #eee;">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col">
+            <nav class="navbar navbar-light bg-secondary justify-content-between">
+              
+                
+                <a href="/home" class="btn btn-dark" role="button">Back Home</a>
+                <br><br>
+                <a href="/addaddress" class="btn btn-dark" role="button">Add Adress</a>
+                <br><br>
+                <a href="/fpassword" class="btn btn-dark" role="button">Change password</a>
+                <!-- <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search">
+                    <input class="btn btn-outline-dark my-2 my-sm-0" value="search" type="submit">
+                  </form> -->
+                <a href="/logout" class="btn btn-danger" role="button">Logout</a>
+            </nav>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                class="rounded-circle img-fluid" style="width: 150px;">
+              <h5 class="my-3"> <%= user.name %></h5>
+              
+              
+              <div class="d-flex justify-content-center mb-2">
+                <!-- <button type="button" class="btn btn-primary">Follow</button> -->
+                <a href="/logout" class="fw-bold text-body text-decoration-none">Logout</a>
+              
+                <!-- <button type="button" class="btn btn-outline-primary ms-1">Logout</button> -->
+              </div>
+              
+            </div>
+          </div>
+          <div class="card mb-4 mb-lg-0">
+            
+          </div>
+        </div>
+        <div class="col-lg-8 ">
+          <div class="card mb-4">
+            <div class="card-body p-5">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">name</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0"><%= user.name %></p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Email</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0"><%= user.email %></p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Mobile</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0"><%= user.mobile %></p>
+                </div>
+              </div>
+              
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Adressee's Name :</p>
+                </div>
+                <div class="col-sm-9">
+                    <div class="col-sm-3">
+                        <p class="mb-0"><%=address.addresses[0].name%></p>
+                      </div>
+                      
+                  
+                </div>
+              </div>
+                
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Adress :</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="col-sm-3">
+                            <p class="mb-0"><%=address.addresses[0].address%></p>
+                          </div>
+                          
+                      
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Pincode :</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="col-sm-3">
+                            <p class="mb-0"><%=address.addresses[0].pincode%></p>
+                          </div>
+                          
+                      
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">State :</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="col-sm-3">
+                            <p class="mb-0"><%=address.addresses[0].state%></p>
+                          </div>
+                          
+                      
+                    </div>
+                  </div>
+
+                  <div class="d-flex justify-content-center mb-2">
+                    
+                      <a href="/editaddress?id=<%= address.addresses[0]._id %>">
+                        <button type="button" class="btn btn-outline-primary ms-1">Edit</button>
+                      </a>
+                      
+                    </form>
+                  </div>
+                  
+                  
+
+                
+            
+              </div>
+              
+                  <hr>
+                </div>
+              </div>
+            </div>
+          </div>
+         
+            
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <% include('../layouts/footer') %>

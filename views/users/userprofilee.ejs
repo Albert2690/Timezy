@@ -1,0 +1,391 @@
+<%- include('../partials/header')%>
+<style>
+	/* Custom styles for the recharge modal */
+	#rechargeModal {
+		background-color: rgba(0, 0, 0, 0.5);
+			
+		/* Semi-transparent background */
+	}
+
+	.modal-dialog {
+		max-width: 400px;
+		/* Set a maximum width for the modal */
+	}
+
+	.modal-header {
+		background-color: #f8f9fa;
+		/* Light gray background for the header */
+		border-bottom: none;
+	}
+
+	.modal-title {
+		font-weight: bold;
+		color: #333;
+	}
+
+	.modal-body {
+		padding: 20px;
+	}
+
+	.form-group label {
+		font-weight: bold;
+		color: #333;
+	}
+
+	.form-control {
+		border-color: #ccc;
+	}
+
+	.btn-primary {
+		background-color: #007bff;
+		border: none;
+	}
+
+	.btn-primary:hover {
+		background-color: #0056b3;
+	}
+
+	.modal-content {
+		border-radius: 10px;
+	}
+
+
+	/* General styles */
+	body {
+		font-family: Arial, sans-serif;
+	}
+
+	/* Wallet Container */
+	.wallet-container {
+		background-color: #f0f0f0;
+		padding: 20px;
+		border-radius: 10px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	}
+
+	/* Wallet Header */
+	.wallet-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.wallet-header img {
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+		margin-right: 10px;
+	}
+
+	.username {
+		font-size: 18px;
+		font-weight: bold;
+	}
+
+	.balance-label {
+		font-size: 14px;
+		color: #777;
+	}
+
+	.balance-amount {
+		font-size: 24px;
+		font-weight: bold;
+	}
+
+	/* Wallet Menu */
+	.wallet-menu ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+	}
+
+	.wallet-menu li {
+		margin-right: 20px;
+	}
+
+	.wallet-menu a {
+		text-decoration: none;
+		color: #333;
+		font-weight: bold;
+	}
+
+	/* Transaction History */
+	.transaction-history {
+		margin-top: 20px;
+	}
+
+	.transaction-history h2 {
+		font-size: 20px;
+		font-weight: bold;
+		margin-bottom: 10px;
+	}
+
+	.transaction-history ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.transaction-history li {
+		margin-bottom: 10px;
+	}
+
+	.transaction-amount {
+		font-size: 18px;
+	}
+
+	.transaction-date,
+	.transaction-type {
+		font-size: 14px;
+		color: #777;
+	}
+</style>
+
+	<div class="dashboard-wrapper user-dashboard">
+		<div class="media">
+			<div class="pull-left">
+				<img class="media-object user-img" src="images/avatar.png" alt="Image">
+			</div>
+			<div class="media-body">
+				<h2 class="media-heading">Welcome, <%= user.name.toUpperCase() %>
+				</h2>
+
+
+			</div>
+		</div>
+		<div class="total-order mt-20">
+			<!-- <h4>Total Orders</h4>
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Order ID</th>
+										<th>Date</th>
+										<th>Items</th>
+										<th>Total Price</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><a href="#!">#252125</a></td>
+										<td>Mar 25, 2016</td>
+										<td>2</td>
+										<td>$ 99.00</td>
+									</tr>
+									<tr>
+										<td><a href="#!">#252125</a></td>
+										<td>Mar 25, 2016</td>
+										<td>2</td>
+										<td>$ 99.00</td>
+									</tr>
+									<tr>
+										<td><a href="#!">#252125</a></td>
+										<td>Mar 25, 2016</td>
+										<td>2</td>
+										<td>$ 99.00</td>
+									</tr>
+								</tbody>
+							</table>
+						</div> -->
+
+			<div class="wallet-container">
+				<div class="wallet-header">
+					<div class="profile">
+						<span class="username">
+							<%=user.name%>
+								</user.name>
+						</span>
+					</div>
+					<div class="balance">
+						<span class="balance-label">Wallet Balance</span>
+						<span class="balance-amount">$<%=user.wallet%></span>
+					</div>
+				</div>
+				<div class="wallet-menu">
+					<ul>
+						<li><a href="#">Transactions</a></li>
+						<!-- <li><a href="#">Send Money</a></li>
+								<li><a href="#">Receive Money</a></li>
+								<li><a href="#">Cards</a></li> -->
+						<li><a href="#" data-toggle="modal" data-target="#rechargeModal">Recharge Wallet</a></li>
+
+					</ul>
+				</div>
+				<div class="transaction-history">
+					<h2>Transaction History</h2>
+					<ul>
+						<%user.walletTransactions.forEach((item)=>{%>
+
+							<%if(item.message==='Debited'){%>
+
+
+								<li>
+									<span class="transaction-amount">-$<%=item.amount%></span>&nbsp;&nbsp;&nbsp;
+									<span class="transaction-date">
+										<%=item.createdAt.toLocaleString()%>
+									</span>&nbsp;&nbsp;&nbsp;
+									<span class="transaction-type" style="color: red;">
+										<%=item.message%>
+									</span>
+								</li>
+								<%}else{%>
+									<li>
+										<span class="transaction-amount">+$<%=item.amount%></span>
+										<span class="transaction-date">
+											<%=item.createdAt.toLocaleString()%>
+										</span>
+										<span class="transaction-type" style="color: rgb(35, 194, 35);">
+											<%=item.message%>
+										</span>
+									</li>
+									<%}%>
+										<%})%>
+											<!-- Add more transaction entries here -->
+					</ul>
+					<!-- ... (your existing code) ... -->
+
+					<div class="modal fade" id="rechargeModal" tabindex="-1" aria-labelledby="rechargeModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="rechargeModalLabel">Recharge Wallet</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<div class="form-group">
+										<label for="rechargeAmount">Amount</label>
+										<input type="text" class="form-control" id="rechargeAmount" name="amount" required>
+									</div>
+									<button type="button" onclick="rechargeAmount()" class="btn btn-primary">Recharge</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+
+
+
+				</div>
+				
+			</div>
+
+		</div>
+		
+	</div>
+	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+
+	
+<script>
+    const rechargeAmount = ()=>{
+        console.log("hiiii");
+        const amount = $('#rechargeAmount').val()
+        console.log(amount)
+
+		$.ajax({
+
+			url:"/wallet-recharge",
+			method:'post',
+			data:{amount},
+			success:((response)=>{
+				 if(response.orderstatus===true){
+					razorpayment(response.order)
+				 }else{
+					console.log("error")
+				 }
+			})
+
+		})
+    }
+
+
+
+	function razorpayment(order) {
+		console.log((order));
+            var options = {
+                
+
+                "key": "rzp_test_4xF26d6MOEX0v9", // Enter the Key ID generated from the Dashboard
+                "amount": parseInt( order.amount), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "Timezy",
+                "description": "Test Transaction",
+                "image": "https://example.com/your_logo",
+                "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "handler": function (response) {
+                    // alert(response.razorpay_payment_id);
+                    // alert(response.razorpay_order_id);
+                    // alert(response.razorpay_signature)
+                    // console.log("hiii444")
+                    verifyPayment(response, order)
+
+
+                    
+                },
+                "prefill": {
+                    "name": "Gaurav Kumar",
+                    "email": "gaurav.kumar@example.com",
+                    "contact": "9000090000"
+                },
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+
+            var rzp1 = new Razorpay(options);
+            rzp1.on('payment.failed', function (response) {
+                alert(response.error.code);
+                alert(response.error.description);
+                alert(response.error.source);
+                alert(response.error.step);
+                alert(response.error.reason);
+                alert(response.error.metadata.order_id);
+                alert(response.error.metadata.payment_id);
+            });
+            rzp1.open();
+
+
+
+        }
+
+
+         function verifyPayment(response,order){
+            console.log(order.id);
+            $.ajax({
+                url:"/verify-walletpayment",
+                method:"post",
+                data:{response,order},
+                success:((response)=>{
+                 console.log(response.orderid,'kii')
+                 if(response.success===true){
+                    Swal.fire({
+                        text:"Recharge Successfull",
+                        icon:'success',
+                        showCancelButton:false,
+                        timer:2000,
+                    }).then((result)=>{
+                        location.href = '/myaccount'
+
+                    })
+                 }
+            })
+            })
+           
+         }
+        
+
+
+    // Other JavaScript code you have
+</script>
+
+
+
+	<%- include('../partials/footer')%>

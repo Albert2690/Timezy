@@ -1,0 +1,53 @@
+<%- include('../layouts/header.ejs') %>
+<nav class="navbar navbar-light bg-secondary justify-content-between">
+    <a class="navbar-brand " style="color: aliceblue;">Welcome <%= user.name%></a>
+   
+    <br><br>
+    
+    <a href="/admin/dashboard" class="btn btn-dark" role="button">Back Home</a>
+    <br><br>
+    <a href="/addaddress" class="btn btn-dark" role="button">Add Adress</a>
+    <br><br>
+    <a href="/admin/blockedusers" class="btn btn-dark" role="button">Blocked Users</a>
+    <!-- <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search">
+        <input class="btn btn-outline-dark my-2 my-sm-0" value="search" type="submit">
+      </form> -->
+    <a href="" class="btn btn-danger" role="button">Logout</a>
+</nav>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Town</th> 
+            <th scope="col">Adress</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+
+           
+        </tr>
+    </thead>
+
+    <% if(addresses.length > 0){ %>
+        <% for(let i=0; i<addresses.length; i++){ %>
+            <tr>
+                <td><%= i+1 %></td>
+                <td><%= addresses[i].name %></td>
+                <td><%= addresses[i].town %></td>
+                <td><%= addresses[i].address %></td>
+                <td><a href="/editaddress?id=<%=addresses[i]._id%>" class="btn btn-outline-dark" role="button">Edit</a></td>
+                <td><a href="/deleteaddress?id=<%=addresses[i]._id%>" class="btn btn-outline-dark" role="button">Edit</a></td>
+
+               
+            </tr>
+        <% } %>
+    <% } else { %>
+        <tr>
+            <td colspan="4">Users Not found</td>
+        </tr>
+    <% } %>
+</table>
+
+<%- include('../layouts/footer.ejs') %>

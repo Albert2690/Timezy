@@ -1,0 +1,58 @@
+<%- include('../layouts/header.ejs') %>
+<nav class="navbar navbar-light bg-light justify-content-between">
+    <a class="navbar-brand">Welcome</a>
+    <a href="/admin/addcategories" class="btn btn-success" role="button">Add categories</a>
+    <br><br>
+    <a href="/admin/dashboard" class="btn btn-success" role="button">Back Home</a>
+    <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search">
+        <input class="btn btn-outline-success my-2 my-sm-0" value="search" type="submit">
+      </form>
+    <a href="/admin/logout" class="btn btn-danger" role="button">Logout</a>
+</nav>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <!-- <th scope="col">Price</th> -->
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+
+           
+        </tr>
+    </thead>
+
+    <% if(category.length > 0){ %>
+        <% for(let i=0; i<category.length; i++){ %>
+            <tr>
+                <td><%= i+1 %></td>
+                <td><%= category[i].name %></td>
+                <!-- <td>
+                    <% if (category[i].image) { %>
+                        <img src="/category-images/<%= category[i].image %>" alt="Product Image" width="50" height="50">
+                    <% } else { %>
+                        No Image Available
+                    <% } %>
+                </td> -->
+
+                <td><%= category[i].description %></td>
+                <!-- <td><%= category[i].price %></td> -->
+
+                
+                <td><a href="/admin/editcategories?id=<%=category[i]._id%>" class="btn btn-outline-success" role="button">Edit</a></td>
+                <td><a href="/admin/deletecategories?id=<%=category[i]._id%>" class="btn btn-outline-success" role="button">Delete</a></td>
+
+               
+            </tr>
+        <% } %>
+    <% } else { %>
+        <tr>
+            <td colspan="4">Products Not Found</td>
+        </tr>
+    <% } %>
+</table>
+
+<%- include('../layouts/footer.ejs') %>
