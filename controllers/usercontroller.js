@@ -1,4 +1,4 @@
-require('dotenv').config()
+
 const bcrypt = require('bcrypt')
 const useraddress = require('../model/addressmodel')
 const profilehelper = require('../helpers/profilehelper')
@@ -8,7 +8,7 @@ const { LEGAL_TLS_SOCKET_OPTIONS } = require("mongodb");
 const cart = require('../model/cartmodel')
 const Review = require('../model/review')
 const voucherCode = require("voucher-code-generator");
-
+require('dotenv').config()
 
 const otpGenerator = require('otp-generator')
 const cartmodel = require('../model/cartmodel')
@@ -124,14 +124,15 @@ const register = async (req, res) => {
 const verifylogin = async (req, res) => {
     const email = req.body.email
     const password = req.body.password
-    const userdata = await User.findOne({ email: email,is_admin:0 })
+    const userdata = await User.findOne({email:email,is_admin:0 })
+   
     if (!email || !password) {
-        res.render('login', { message: 'sorry Dude' })
+      return  res.render('login', { message: 'sorry Dude' })
         // console.log(message);
     }
     else if (userdata) {
         
-        const passwordmatch = await bcrypt.compare(password, userdata.password)
+        const passwordmatch = await bcrypt.compare(password,userdata.password)
         if (passwordmatch && userdata.is_blocked === 0) {
             //here made a change so take a look when error hits
             req.session.user = userdata
@@ -139,7 +140,7 @@ const verifylogin = async (req, res) => {
          
             res.redirect('/home')
         } else {
-            res.render('login', { message: 'sorry' })
+            res.render('login', { message: 'Sorry Dude Incorrect Password or User is Blocked' })
         }
     }
 }
@@ -190,11 +191,12 @@ const sendotp = async (req, res) => {
 const home = async (req, res) => {
     try {
         const userid = req.session.user_id
-        
+      
         const products = await product.find({ is_listed: 0 })
         if(!userid){
             const login =0
-            res.render('home',{login,product:products,cartlength:0})
+           
+             return res.render('home',{login,product:products,cartlength:0})
         }
 
         const usercart = await cart.findOne({user:userid})
@@ -262,7 +264,7 @@ const shop = async (req, res) => {
         const products = await product.find({
             is_listed:0, $or:[{name:{$regex:'.*'+search+'.*',$options:'i'}}
            
-           ] })
+           ] }) 
            
         res.render('product', { product: products,cartlength })
     } catch (error) {
