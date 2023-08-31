@@ -57,6 +57,8 @@ adminRoute.get('/deleteproduct', adminController.deleteproduct)
 
 
 
+adminRoute.get('/addcategories',adminController.addcategories)
+adminRoute.post('/addcategories', adminController.createcategories)
 
 adminRoute.get('/editcategories', adminController.loadeditcategories)
 

@@ -377,6 +377,7 @@ const blockedusers = async (req, res) => {
 const loadcategories = async (req, res) => {
     try {
         const categories = await Categories.find({})
+       
 
         res.render('categories1', { category: categories })
     } catch (error) {
@@ -404,6 +405,7 @@ const createcategories = async (req, res) => {
 const loadeditcategories = async (req, res) => {
     try {
         const id = req.query.id
+        
         // console.log(id);
 
         res.render('editcategories', { category: id })
