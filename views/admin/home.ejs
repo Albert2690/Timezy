@@ -223,7 +223,7 @@
             </div>
           
             <div class="row">
-                <% if(orders[0].totalpricesum){%>
+                <% if(orders[0].totalpricesum!==undefined){%>
                 <div class="col-lg-3">
                     <div class="card card-body mb-4">
                         <article class="icontext">
@@ -311,6 +311,7 @@
                         </article>
                     </div>
                 </div>
+                <% }%>
                 <div class="col-lg-3">
                     <div class="card card-body mb-4">
                         <article class="icontext">
@@ -340,7 +341,7 @@
                     </div>
                 </div>
 
-               <% }%>
+             
             </div>
             <div class="row">
                 <div class="col-xl-8 col-lg-12">
