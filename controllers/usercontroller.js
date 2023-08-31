@@ -13,6 +13,8 @@ require('dotenv').config()
 const otpGenerator = require('otp-generator')
 const cartmodel = require('../model/cartmodel')
 
+
+
 const client = require('twilio')(process.env.ACCOUNTSID, process.env.AUTHTOKEN)
 const securepassword = async (password) => {
     try {
