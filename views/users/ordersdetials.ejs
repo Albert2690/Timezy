@@ -55,10 +55,10 @@
             </td>
             <td><a href="/orderdetials/<%= order._id %>" class="btn btn-default">View</a></td>
             <% if (order.status === 'placed') { %>
-                <td><a  onclick="cancelOrder('<%= order._id %>', 'cancel requested'); return false;"><i class="fas fa-times"></i> Cancel</a></td>
+                <td><a href="" onclick="cancelOrder('<%= order._id %>', 'cancel requested'); return false;"><i class="fas fa-times"></i> Cancel</a></td>
             <% } else if (order.status === 'delivered') { %>
-                <td><a  onclick="cancelOrder('<%= order._id %>', 'return requested'); return false;"><i class="fas fa-reply"></i> Return</a></td>
-                <td><a  ><i class="fas fa-reply"></i>Detials</a></td>
+                <td><a href="" onclick="cancelOrder('<%= order._id %>', 'return requested'); return false;"><i class="fas fa-reply"></i> Return</a></td>
+                <td><a href="#" ><i class="fas fa-reply"></i>Detials</a></td>
 
             <% } else { %>
                 <td>....</td>
