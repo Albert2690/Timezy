@@ -396,7 +396,7 @@ const productview = async (req, res) => {
         const userid =req.session.user_id
         let averageRating=0
         let average=0
-    
+        let cartlength = 0
 
         if(id!==undefined){
         if(id.length!==userid.length){
@@ -408,7 +408,7 @@ const productview = async (req, res) => {
        
         const usercart = await cart.findOne({user:userid})
         const userreviews = await Review.find({product:id})
-        let cartlength = usercart?.cartitems?.length||0
+         cartlength = usercart?.cartitems?.length||0
       
         const rating = await Review.find({product:id})
         if(rating){

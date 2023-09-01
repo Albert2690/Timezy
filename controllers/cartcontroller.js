@@ -54,7 +54,7 @@ const addcart = async (req, res) => {
 
      
     } else {
-      res.send("Failed to add the product to cart")
+      res.send("Product Already exists in the Cart")
     }
   } catch (error) {
     console.log(error.message);
