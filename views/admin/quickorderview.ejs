@@ -182,70 +182,90 @@
                 </ul>
             </div>
         </header>
-        <section class="content-main">
-            <div class="content-header">
-                <div>
-                    <h2 class="content-title card-title">Categories </h2>
-                    <p>Add, edit or delete a category</p>
+        
+        <section class="vh-100 gradient-custom-2" style="margin-top: 0px;">
+           
+            <div class="container py-5 h-100">
+                
+              <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-md-10 col-lg-8 col-xl-6">
+                    <div style="margin-left: 200px;">
+                        <h3>Orderview</h3>
+                    </div>
+                  <div class="card card-stepper" style="border-radius: 16px;">
+                    <div class="card-header p-4">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            
+        
+                        
+                          <p class="text-muted mb-2"> Order ID <span class="fw-bold text-body"><%=userorder._id%></span></p>
+                          <p class="text-muted mb-0"> Placed On <span class="fw-bold text-body"><%=userorder.createdAt.toLocaleString()%></span> </p>
+                        </div>
+                     
+                      </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="flex-fill"  >
+                            Delivery Address:
+                            <div>
+                            <%=userorder.address.name%>,
+                            <br>
+                            <%=userorder.address.mobile%>,
+                                <br>
+                            <%=userorder.address.town%>,
+                            <%=userorder.address.pincode%>,
+                            <%=userorder.address.adress%>,
+                            <%=userorder.address.state%>
+    
+    
+                        </div>
+                        <%userorder.items.forEach((products)=>{%>
+                      <div class="d-flex flex-row mb-4 pb-2" style="margin-top: 40px;">
+                    
+                        <div class="flex-fill">
+                          <h5 class="bold"><%=products.product.name%></h5>
+                          <p class="text-muted"> Qt: 1 <%products.quantity%></p>
+                          <h4 class="mb-3"> <h6 >INR</h6> <%=products.price%> <span class="small text-muted"> via (<%=userorder.paymentmethod%>) </span></h4>
+                          <!-- <p class="text-muted">Tracking Status on: <span class="text-body">11:30pm, Today</span></p> -->
+                        </div>
+                        <div>
+                          <img class="align-self-center img-fluid " 
+                            src="/product-images/<%=products.product.image[0]%>" width="140"  style="margin-left: 150px; height: 100px;">
+                            
+                        </div>
+                        
+                        </div>
+                        
+                        <%})%>
+                      </div>
+                     
+                      <!-- <ul id="progressbar-1" class="mx-0 mt-0 mb-5 px-0 pt-0 pb-4">
+                        <li class="step0 active" id="step1"><span
+                            style="margin-left: 22px; margin-top: 12px;">PLACED</span></li>
+                        <li class="step0 active text-center" id="step2"><span>SHIPPED</span></li>
+                        <li class="step0 text-muted text-end" id="step3"><span
+                            style="margin-right: 22px;">DELIVERED</span></li>
+                      </ul> -->
+                    </div>
+                    <!-- <div class="card-footer p-4">
+                      <div class="d-flex justify-content-between">
+                        <h5 class="fw-normal mb-0"><a href="/ordersdetials">View all orders</a></h5>
+                        <div class="border-start h-100"></div>
+                        <h5 class="fw-normal mb-0"><a href="#!"></a></h5>
+                        <div class="border-start h-100"></div>
+                        <h5 class="fw-normal mb-0"><a href="/shop">Continue Shopping</a></h5>
+                        <div class="border-start h-100"></div>
+                        <h5 class="fw-normal mb-0"><a href="#!" class="text-muted"><i class="fas fa-ellipsis-v"></i></a>
+                        </h5>
+                      </div> -->
+                    </div>
+                  </div>
                 </div>
-                <div>
-                    <input type="text" placeholder="Search Categories" class="form-control bg-white">
-                </div>
+              </div>
             </div>
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                       
-                        <div class="col-md-9">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">
-                                                
-                                            </th>
-                                           
-                                            <th>Name</th>
-                                            <th>Description</th>
-                                            
-                                           
-                                            <th class="text-end">Action</th>
-                                        </tr>
-                                    </thead>
-                                  
-                                    <tbody>
-                                        <% if(category.length > 0){ %>
-                                            <% for(let i=0; i<category.length; i++){ %>
-                                        <tr>
-                                          
-                                                    <tr>
-                                                      
-                                                        <td><%= i+1 %></td>
-                                                        <td><%= category[i].name %></td>
-                                                        <td><%= category[i].description%></td>
-                                                
-                                            <td class="text-end">
-                                                <div class="dropdown">
-                                                    <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                                    <div class="dropdown-menu">
-                                                        
-                                                        <a class="dropdown-item" href="/admin/editcategories?id=<%= category[i]._id %>">Edit info</a>
-                                                       
-                                                    </div>
-                                                
-                                                </div> <!-- dropdown //end -->
-                                            </td>
-                                        </tr>
-                                        <%  }}%>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div> <!-- .col// -->
-                    </div> <!-- .row // -->
-                </div> <!-- card body .// -->
-            </div> <!-- card .// -->
-        </section> <!-- content-main end// -->
-        <footer class="main-footer font-xs">
+          </section>
+          <footer class="main-footer font-xs">
             <div class="row pb-30 pt-15">
                 <div class="col-sm-6">
                     <script>
@@ -270,5 +290,5 @@
 </body>
 
 
-<!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/page-categories.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:33:21 GMT -->
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/page-products-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:33:12 GMT -->
 </html>

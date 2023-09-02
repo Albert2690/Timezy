@@ -53,13 +53,12 @@
                     <span class="label label-primary rounded-pill" style="background-color: rgb(86, 246, 182);color: aliceblue;">Refunded</span>
                 <% } %>
             </td>
-            <td><a href="/orderdetials/<%= order._id %>" class="btn btn-default">View</a></td>
+            <td><a href="/orderdetials?id=<%= order._id %>" class="btn btn-default">View</a></td>
             <% if (order.status === 'placed') { %>
                 <td><a href="" onclick="cancelOrder('<%= order._id %>', 'cancel requested'); return false;"><i class="fas fa-times"></i> Cancel</a></td>
             <% } else if (order.status === 'delivered') { %>
                 <td><a href="" onclick="cancelOrder('<%= order._id %>', 'return requested'); return false;"><i class="fas fa-reply"></i> Return</a></td>
-                <td><a href="#" ><i class="fas fa-reply"></i>Detials</a></td>
-
+                
             <% } else { %>
                 <td>....</td>
             <% } %>

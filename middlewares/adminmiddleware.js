@@ -1,29 +1,28 @@
 const islogin = async (req, res, next) => {
-    try {
-        if (!req.session.user_id) {
-            // User is not logged in, redirect to login page or perform appropriate action
-           next()
-            
-        } else {
-            // User is logged in, continue to next middleware
-            res.redirect('/admin/dashboard')
-        }
-    } catch (error) {
-        console.log(error);
+  try {
+    if (!req.session.admin) {
+      // User is not logged in, redirect to login page or perform appropriate action
+      next();
+    } else {
+      // User is logged in, continue to next middleware
+      res.redirect("/admin/dashboard");
     }
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-const isLogout =async (req,res,next)=>{
-    try{
-        if(!req.session.user_id){
-            res.redirect('/admin')
-        }else{
-            next();
-        }
-    }catch(error){
-        console.log(error);
+const isLogout = async (req, res, next) => {
+  try {
+    if (!req.session.admin) {
+      res.redirect("/admin");
+    } else {
+      next();
     }
-}
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // const isLogout = async (req, res, next) => {
 //     try {
@@ -40,6 +39,6 @@ const isLogout =async (req,res,next)=>{
 // };
 
 module.exports = {
-   
-    islogin,isLogout
+  islogin,
+  isLogout,
 };

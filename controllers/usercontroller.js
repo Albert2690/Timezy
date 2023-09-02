@@ -204,7 +204,7 @@ const home = async (req, res) => {
         const usercart = await cart.findOne({user:userid})
        
         let cartlength = usercart?.cartitems?.length||0
-        console.log(cartlength,'al');
+       
         res.render('home', { product: products,cartlength,login:1 })
         // console.log(req.session.user_id+'GTT');
     } catch (error) {
@@ -280,7 +280,7 @@ const loadmen = async(req,res)=>{
         const usercart = await cart.findOne({user:userid})
         let cartlength = usercart?.cartitems?.length||0
 
-        const products = await product.find({category:'64abcdadf1f56cf65d5fe693'})
+        const products = await product.find({category:'64f07e11e1ebc75c961f1d79'})
         res.render('men',{product:products,cartlength})
      
     }catch(error){
@@ -292,11 +292,11 @@ const loadmen = async(req,res)=>{
 
 const loadwomen = async(req,res)=>{
     try{
-        const userid =req.session.user_id
+        const userid =req.session.user_id 
         const usercart = await cart.findOne({user:userid})
         let cartlength = usercart?.cartitems?.length||0
 
-        const products = await product.find({category:'64ac25a4900296367c374577'})
+        const products = await product.find({category:'64f06e6eddd86e1c2eb05297'})
         
         res.render('men',{product:products,cartlength})
      

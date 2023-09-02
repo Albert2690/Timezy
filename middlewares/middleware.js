@@ -1,41 +1,39 @@
 const islogin = async (req, res, next) => {
-    try {
-        if (!req.session.user) {
-            // User is not logged in, redirect to login page or perform appropriate action
-            next()
-            
-        } else {
-            // User is logged in, continue to next middleware
-          res.redirect('/home')
-         
-        }
-    } catch (error) {
-        console.log(error);
+  try {
+    if (!req.session.user) {
+      // User is not logged in, redirect to login page or perform appropriate action
+      next();
+    } else {
+      // User is logged in, continue to next middleware
+      res.redirect("/home");
     }
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-const isauth = async(req,res,next)=>{
-    try{
-        if(req.session.user){
-            next();
-        }else{
-            res.redirect('/')
-        }
-    }catch(error){
-        console.log(error);
+const isauth = async (req, res, next) => {
+  try {
+    if (req.session.user) {
+      next();
+    } else {
+      res.redirect("/");
     }
-}
-const isLogout =async (req,res,next)=>{
-    try{
-        if(!req.session.user){
-          res.redirect('/')
-        }else{
-            next()
-        }
-    }catch(error){
-        console.log(error);
+  } catch (error) {
+    console.log(error);
+  }
+};
+const isLogout = async (req, res, next) => {
+  try {
+    if (!req.session.user) {
+      res.redirect("/");
+    } else {
+      next();
     }
-}
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // const isLogout = async (req, res, next) => {
 //     try {
@@ -52,6 +50,7 @@ const isLogout =async (req,res,next)=>{
 // };
 
 module.exports = {
-   
-    islogin,isLogout,isauth
+  islogin,
+  isLogout,
+  isauth,
 };

@@ -27,7 +27,7 @@
         <div class="aside-top">
             <a href="#" class="flex-c-m trans-04 p-lr-25"
                 style="font-size: 40px;font-family:kaushan script; color: #205645;font-weight: bolder;">
-                <!-- <img src="images/icons/logo-01.png" alt="IMG-LOGO"> -->
+
                 Timezy
             </a>
             <div>
@@ -62,7 +62,7 @@
                     <div class="submenu">
                         <a href="/admin/editusers" class="active">Users</a>
 
-                        <a href="/admin/blockedusers'" class="active">Blocked Users</a>
+                        <a href="/admin/blockedusers" class="active">Blocked Users</a>
 
                     </div>
                 </li>
@@ -93,23 +93,25 @@
                         <span class="text">Add product</span>
                     </a>
                     <div class="submenu">
-                        <a href="/admin/insertproduct">Add product 1</a>
-                        <!-- <a href="page-form-product-2.html">Add product 2</a>
-                        <a href="page-form-product-3.html">Add product 3</a>
-                        <a href="page-form-product-4.html">Add product 4</a> -->
+                        <a href="/admin/insertproduct">Add product </a>
+
+
                     </div>
 
                 </li>
                 <li class="menu-item has-submenu">
                     <a class="menu-link" href="page-sellers-cards.html"> <i class="icon material-icons md-store"></i>
-                        <span class="text">Categories</span>
+                        <span class="text">Categories </span>
                     </a>
                     <div class="submenu">
+
+                        <a href="/admin/addcategories">Add Categories</a>
                         <a href="/admin/categories">categories</a>
-                        <!-- <a href="page-sellers-list.html">Sellers list</a>
-                        <a href="page-seller-detail.html">Seller profile</a> -->
+
                     </div>
+
                 </li>
+
 
                 <li class="menu-item has-submenu">
                     <a class="menu-link" href="page-sellers-cards.html"> <i class="icon material-icons md-store"></i>
@@ -118,8 +120,7 @@
                     <div class="submenu">
                         <a href="/admin/loadaddcoupon">Add Coupon</a>
                         <a href="/admin/couponlist" class="active">Coupon List</a>
-                        <!-- <a href="page-sellers-list.html">Sellers list</a>
-                        <a href="page-seller-detail.html">Seller profile</a> -->
+
                     </div>
                 </li>
                 <li class="menu-item">
@@ -144,31 +145,12 @@
     </aside>
     <main class="main-wrap">
         <header class="main-header navbar">
-            <div class="col-search">
-                <form class="searchform">
-                    <div class="input-group">
-                        <input list="search_terms" type="text" class="form-control" placeholder="Search term">
-                        <button class="btn btn-light bg" type="button"> <i
-                                class="material-icons md-search"></i></button>
-                    </div>
-                    <datalist id="search_terms">
-                        <option value="Products">
-                        <option value="New orders">
-                        <option value="Apple iphone">
-                        <option value="Ahmed Hassan">
-                    </datalist>
-                </form>
-            </div>
+
             <div class="col-nav">
                 <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i
                         class="material-icons md-apps"></i> </button>
                 <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link btn-icon" href="#">
-                            <i class="material-icons md-notifications animation-shake"></i>
-                            <span class="badge rounded-pill">3</span>
-                        </a>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link btn-icon darkmode" href="#"> <i class="material-icons md-nights_stay"></i>
                         </a>
@@ -177,20 +159,7 @@
                         <a href="#" class="requestfullscreen nav-link btn-icon"><i
                                 class="material-icons md-cast"></i></a>
                     </li>
-                    <li class="dropdown nav-item">
-                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownLanguage"
-                            aria-expanded="false"><i class="material-icons md-public"></i></a>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLanguage">
-                            <a class="dropdown-item text-brand" href="#"><img src="../asset/imgs/theme/flag-us.png"
-                                    alt="English">English</a>
-                            <a class="dropdown-item" href="#"><img src="../asset/imgs/theme/flag-fr.png"
-                                    alt="Français">Français</a>
-                            <a class="dropdown-item" href="#"><img src="../asset/imgs/theme/flag-jp.png"
-                                    alt="Français">日本語</a>
-                            <a class="dropdown-item" href="#"><img src="../asset/imgs/theme/flag-cn.png"
-                                    alt="Français">中国人</a>
-                        </div>
-                    </li>
+
                     <li class="dropdown nav-item">
                         <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount"
                             aria-expanded="false"> <img class="img-xs rounded-circle"
@@ -216,25 +185,27 @@
         <section class="content-main">
             <div class="row">
                 <div class="col-9">
-                    <form action="/admin/insertproduct" method="post" class="mx-1 mx-md-4" enctype="multipart/form-data">
+                    <form action="/admin/insertproduct" method="post" class="mx-1 mx-md-4"
+                        enctype="multipart/form-data">
 
-                    <div class="content-header">
-                        <h2 class="content-title">Add New Product</h2>
-                        <div>
-                           
-                            <button type="submit" class="btn btn-md rounded font-sm hover-up">Publish</button>
+                        <div class="content-header">
+                            <h2 class="content-title">Add New Product</h2>
+                            <div>
+
+                                <button type="submit" class="btn btn-md rounded font-sm hover-up">Publish</button>
+                            </div>
                         </div>
-                    </div>
                 </div>
-                
+
                 <div class="col-lg-6">
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="mb-4">
                                 <label for="product_brand" class="form-label">Product Name</label>
-                                <input type="text" name="productname" placeholder="Type here" class="form-control" id="product_brand" required>
+                                <input type="text" name="productname" placeholder="Type here" class="form-control"
+                                    id="product_brand" required>
                             </div>
-                            
+
                             <div class="row gx-3">
                                 <!-- <div class="col-md-4  mb-3">
                                     <label for="product_sku" class="form-label">SKU</label>
@@ -249,7 +220,7 @@
                                     <input type="text" placeholder="Type here" class="form-control" id="product_size">
                                 </div> -->
                             </div>
-                           
+
                         </div>
                     </div> <!-- card end// -->
                     <div class="card mb-4">
@@ -293,22 +264,25 @@
                                 <input type="text" name="discount" placeholder="%" class="form-control" required>
                             </div>
                             <div class="mb-4">
-                                <label class="form-label">Offer  Valid Upto</label>
-                                <input type="date" name="validity" placeholder="Type here" class="form-control" required>
+                                <label class="form-label">Offer Valid Upto</label>
+                                <input type="date" name="validity" placeholder="Type here" class="form-control"
+                                    required>
                             </div>
                             <div class="mb-4">
                                 <label class="form-label">Categories</label>
                                 <select class="form-select" name="category" id="category">
-                                    <% if (category.length >= 0) { %>
-                                        <% for (let i = 0; i < category.length; i++) { %>
-                                            <option value="<%= category[i]._id %>"><%= category[i].name %></option>
-                                        <% } %>
-                                    <% } else { %>
-                                        <option value="">No categories available</option>
-                                    <% } %>
+                                    <% if (category.length>= 0) { %>
+                                        <% for (let i=0; i < category.length; i++) { %>
+                                            <option value="<%= category[i]._id %>">
+                                                <%= category[i].name %>
+                                            </option>
+                                            <% } %>
+                                                <% } else { %>
+                                                    <option value="">No categories available</option>
+                                                    <% } %>
                                 </select>
                             </div>
-                           
+
                             <!-- <a href="#" class="font-xs hover-up mr-15"><i class="font-xs material-icons md-close text-body"></i> Tech</a>
                             <a href="#" class="font-xs hover-up mr-15"><i class="font-xs material-icons md-close text-body"></i> Mobile</a>
                             <a href="#" class="font-xs hover-up mr-15"><i class="font-xs material-icons md-close text-body"></i> Apple</a> -->
@@ -344,16 +318,16 @@
                             </div> -->
                         </div>
                     </div> <!-- card end// -->
-                    
+
                 </div>
-            </form>
+                </form>
             </div>
         </section>
         <footer class="main-footer font-xs">
             <div class="row pb-30 pt-15">
                 <div class="col-sm-6">
                     <script>
-                    document.write(new Date().getFullYear())
+                        document.write(new Date().getFullYear())
                     </script> ©, Timezy .
                 </div>
                 <div class="col-sm-6">
@@ -375,4 +349,5 @@
 
 
 <!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/page-form-product-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:33:32 GMT -->
+
 </html>
