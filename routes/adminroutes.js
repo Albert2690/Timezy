@@ -85,6 +85,13 @@ adminRoute.get("/loadaddcoupon", couponcontroller.loadaddcoupon);
 
 adminRoute.post("/addcoupon", couponcontroller.addcoupon);
 
+adminRoute.get('/edit-coupon',couponcontroller.loadeditcoupon)
+
+adminRoute.get('/delete-coupon',couponcontroller.deletecoupon)
+
+adminRoute.post('/editcoupon',couponcontroller.editcoupon)
+
+
 adminRoute.get("/salesreport", adminController.salesreport);
 
 adminRoute.post("/filtersales", adminController.filtersales);

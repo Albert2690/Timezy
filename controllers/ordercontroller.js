@@ -58,19 +58,8 @@ const confirmorder = async (req, res) => {
       });
     }
 
-    const status = "placed";
-
-    const neworder = new order({
-      user: userid,
-      items: items,
-      total: Number(total),
-      status: status,
-      paymentmethod: payment,
-      createdAt: new Date(),
-      address: deliveryadress,
-    });
-    const newid = await neworder.save();
-
+   
+   
     await usercart.cartitems.map(async (product) => {
       const stocks = product.product.stock - product.quantity;
 
@@ -82,6 +71,19 @@ const confirmorder = async (req, res) => {
 
     if (payment === "cod") {
       //    console.log("hii")
+      const status = "placed";
+
+      const neworder = new order({
+        user: userid,
+        items: items,
+        total: Number(total),
+        status: status,
+        paymentmethod: payment,
+        createdAt: new Date(),
+        address: deliveryadress,
+      });
+      const newid = await neworder.save();
+
 
       res.json({ codStatus: true, orderid: newid._id });
     } else if (payment === "razorpay") {
@@ -90,6 +92,19 @@ const confirmorder = async (req, res) => {
       const order = await orderhelper.generateRazorpay(orderid, total);
 
       if (order) {
+        const status = "placed";
+
+        const neworder = new order({
+          user: userid,
+          items: items,
+          total: Number(total),
+          status: status,
+          paymentmethod: payment,
+          createdAt: new Date(),
+          address: deliveryadress,
+        });
+        const newid = await neworder.save();
+
         res.json({ order: order, orderstatus: true });
       } else {
         return res.status(500).json({ message: "Internal Sever Error" });
@@ -111,6 +126,18 @@ const confirmorder = async (req, res) => {
             },
           }
         );
+        const status = "placed";
+
+        const neworder = new order({
+          user: userid,
+          items: items,
+          total: Number(total),
+          status: status,
+          paymentmethod: payment,
+          createdAt: new Date(),
+          address: deliveryadress,
+        });
+        const newid = await neworder.save();
 
         res.json({ walletstatus: true, orderid: newid._id });
       } else {

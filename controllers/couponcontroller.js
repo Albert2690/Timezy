@@ -52,7 +52,7 @@ const addcoupon = async (req, res) => {
       couponcode: data.couponCode,
       usedBy: data.validity,
       minimumAmount: data.minPurchase,
-      maximumDiscount: data.maxDiscountValue,
+      maximumDiscount: data.minDiscountPercentage,
       discountPercentage: data.maxDiscountValue,
       createdAt: Date.now(),
     });
@@ -76,7 +76,47 @@ const addcoupon = async (req, res) => {
     res.status(500).json("Internal Server Error");
   }
 };
+const deletecoupon = async(req,res)=>{
+    try{
+        const id = req.query.id
+        await coupon.deleteOne({_id:id})
+        res.redirect('/admin/couponlist')
 
+    }catch(error){
+        console.log(error)
+        res.status(500).send("Internal Server Error")
+    }
+}
+const loadeditcoupon =async(req,res)=>{
+    try{
+
+        const id = req.query.id
+        const coupons = await coupon.findOne({_id:id})
+        res.render('editcoupon',{coupons})
+    }catch(error){
+        console.log(error)
+        res.status(500).send("Internal Server Error")
+    }
+}
+
+const editcoupon = async(req,res)=>{
+    try{
+        const id = req.body.id
+       
+        
+        const update = await coupon.findOneAndUpdate({_id:id},{$set:{ couponcode: req.body.couponCode,
+            usedBy: req.body.validity,
+            minimumAmount: req.body.minamount,
+            maximumDiscount:req.body.maxdiscountamount ,
+            discountPercentage:req.body.discount,}})
+            if(update){
+                res.redirect('/admin/couponlist')
+            }
+    }catch(error){
+        console.log(error)
+        res.status(500).send("Internal Server Error")
+    }
+}
 const loadcoupnlist = async (req, res) => {
   try {
     const coupons = await coupon.find({});
@@ -108,9 +148,11 @@ const applycoupon = async (req, res) => {
 
     // console.log(coupons,'jjjfff')
     let discountAmount = (total * coupons.discountPercentage) / 100;
+    
     if (discountAmount > coupons.maximumDiscount) {
       discountAmount = coupons.maximumDiscount;
     }
+  
 
     let subtotal = total - discountAmount;
 
@@ -136,4 +178,6 @@ module.exports = {
   loadcoupnlist,
   verifycoupon,
   applycoupon,
+  deletecoupon,editcoupon,
+  loadeditcoupon
 };
